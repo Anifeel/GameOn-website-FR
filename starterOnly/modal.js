@@ -52,13 +52,6 @@ function closeModalRegistration() {
 
 const validate = () => {
     let error = 0;
-    //return true;
-    //modale inscription OK block et none pour l'autre
-    // bouton Fermer et fonction close au click
-    // } else {
-      //  e.preventDefault();
-      // return false
-     
     
     //déclaration variables
     const firstNameInput = document.getElementById('first');
@@ -92,28 +85,33 @@ const validate = () => {
     } else if (!nameRegex.test(firstNameInput.value)) {
         console.log('first non valide');
         let parent = firstNameInput.parentNode;
-        parent.setAttribute('data-error', "Votre prénom peut contenir des lettres, espace et -");
+        parent.setAttribute('data-error', "caractères autorisés : lettres, espaces et -");
         parent.setAttribute('data-error-visible', "true");
         error++;
     } else {
         let parent = firstNameInput.parentNode;
         parent.removeAttribute('data-error');
         parent.removeAttribute('data-error-visible');
-        
     }
 
     //validation nom
     if (!lastNameInput.value) {
         let parentLast = lastNameInput.parentNode;
-        parentLast.setAttribute('data-error', "Votre nom doit comporter au moins 2 caractères");
+        parentLast.setAttribute('data-error', "Votre nom est obligatoire");
         parentLast.setAttribute('data-error-visible', "true");
         error++;
         console.log('champ nom vide');
     } else if (lastNameInput.value.length < 2) {
         console.log('last < 2');
+        let parentLast = lastNameInput.parentNode;
+        parentLast.setAttribute('data-error', "Votre nom doit comporter au moins 2 caractères");
+        parentLast.setAttribute('data-error-visible', "true");
         error++;
     } else if (!nameRegex.test(lastNameInput.value)) {
         console.log('last non valide');
+        let parentLast = lastNameInput.parentNode;
+        parentLast.setAttribute('data-error', "caractères autorisés : lettres, espaces et -");
+        parentLast.setAttribute('data-error-visible', "true");
         error++;
     } else {
         let parent = lastNameInput.parentNode; 
@@ -130,6 +128,9 @@ const validate = () => {
         console.log('champ email vide');
     } else if (!emailRegex.test(emailInput.value)) {
         console.log('email non valide');
+        let parentMail = emailInput.parentNode;
+        parentMail.setAttribute('data-error', "Indiquez un email valide");
+        parentMail.setAttribute('data-error-visible', "true");
         error++;
     } else {
         let parent = emailInput.parentNode; //
@@ -137,7 +138,7 @@ const validate = () => {
         parent.removeAttribute('data-error-visible');
     }
 
-    // NAISSANCE OK 
+    // validation naissance
     if (!birthdateInput.value) {
         let parent = birthdateInput.parentNode;
         parent.setAttribute('data-error', "Date de naissance obligatoire");
@@ -243,9 +244,6 @@ const validate = () => {
         
         closeModal();
         launchModalRegistration();
-
-        // resetForm();
-        //form.validate.resetForm();
         return false;
     }
 }
