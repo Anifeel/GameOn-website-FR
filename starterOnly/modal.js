@@ -16,7 +16,8 @@ const modalRegistrationCloseBtn = document.querySelectorAll(".close-registration
 
 const formData = document.querySelectorAll(".formData");
 const modalRegistration = document.querySelector(".modalRegistration");
-// launch modal event
+
+// ouverture formulaire inscription
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // Fermeture de la fenêtre de confirmation d'inscription
@@ -24,22 +25,22 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
     btn.addEventListener("click", closeModalRegistration);
 });
 
+// fermeture formulaire d'inscription
 modalCloseBtn.forEach((btn) => {
     btn.addEventListener("click", closeModal);
 });
 
-
-
-// launch modal form
+// fonction pour lancer la modale formulaire
 function launchModal() {
     modalbg.style.display = "block";
 }
 
+// fonction pour lancer la modale de confirmation d'inscription
 function launchModalRegistration() {
     modalbgregistration.style.display = "block";
 }
 
-// close modal form
+// fonction pour fermer le formulaire
 function closeModal() {
     modalbg.style.display = "none";
 }
@@ -48,9 +49,6 @@ function closeModal() {
 function closeModalRegistration() {
     modalbgregistration.style.display = "none";
 }
-
-
-
 
 const validate = () => {
     let error = 0;
@@ -68,7 +66,7 @@ const validate = () => {
     const emailInput = document.getElementById('email');
     const birthdateInput = document.getElementById('birthdate');
     const nameRegex = /^[a-z-éèêëïîùüû\s]+$/i;
-    const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const emailRegex = RegExp(/^[a-z0-9._-]+@[a-z_]+?\.[a-z]{2,3}$/);
     const quantityInput = document.getElementById('quantity'); 
     const cguCheckbox = document.getElementById('checkbox1');
     const locations = document.getElementsByName('location');
@@ -113,11 +111,9 @@ const validate = () => {
         console.log('champ nom vide');
     } else if (lastNameInput.value.length < 2) {
         console.log('last < 2');
-        //error = "Le nom doit comporter au moins 2 lettres";
         error++;
     } else if (!nameRegex.test(lastNameInput.value)) {
         console.log('last non valide');
-        //error = "Le nom contient des caractères non autorisés";
         error++;
     } else {
         let parent = lastNameInput.parentNode; 
@@ -140,8 +136,6 @@ const validate = () => {
         parent.removeAttribute('data-error'); //
         parent.removeAttribute('data-error-visible');
     }
-
-    
 
     // NAISSANCE OK 
     if (!birthdateInput.value) {
@@ -173,7 +167,7 @@ const validate = () => {
         }
     }
 
-
+    // vérification champ quantity
     if (!quantityInput.value) {
         let parent = quantityInput.parentNode;
         parent.setAttribute('data-error', "Indiquez un nombre");
@@ -195,7 +189,7 @@ const validate = () => {
         parent.removeAttribute('data-error-visible');    
     }
    
-
+    //vérification ville cochée
     let locationChecked;
     locations.forEach((location) => {
         if (location.checked) {
@@ -229,7 +223,6 @@ const validate = () => {
 
     // test de la variable error à la fin des validations
     if (error !== 0) {
-     
         console.log('formulaire non valide');
         console.log(error);
         return false;
@@ -251,8 +244,6 @@ const validate = () => {
         closeModal();
         launchModalRegistration();
 
-
-        //   modalRegistration.innerHTML = "Merci pour votre inscription" mais créée en html 218 à 225
         // resetForm();
         //form.validate.resetForm();
         return false;
