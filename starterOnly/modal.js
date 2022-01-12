@@ -19,8 +19,8 @@ const modalRegistration = document.querySelector(".modalRegistration");
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// close modal event
-modalRegistrationCloseBtn.forEach((btn) => {
+// Fermeture de la fenêtre de confirmation d'inscription
+    modalRegistrationCloseBtn.forEach((btn) => {
     btn.addEventListener("click", closeModalRegistration);
 });
 
@@ -44,6 +44,7 @@ function closeModal() {
     modalbg.style.display = "none";
 }
 
+// Fonction lancée à la fermeture de la fenêtre de confirmation d'inscription 
 function closeModalRegistration() {
     modalbgregistration.style.display = "none";
 }
@@ -226,7 +227,7 @@ const validate = () => {
         parent.removeAttribute('data-error-visible'); //
     }
 
-    // test la variable error à la fin des validations
+    // test de la variable error à la fin des validations
     if (error !== 0) {
      
         console.log('formulaire non valide');
@@ -257,4 +258,4 @@ const validate = () => {
         return false;
     }
 }
-// modifs apportées : ajouté  .modalRegistration au css 160
+
